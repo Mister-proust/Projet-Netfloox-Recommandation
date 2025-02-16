@@ -21,6 +21,16 @@ class RecSysKNN :
         _, idxs = self.nbrs.kneighbors(self._X[idx,:].reshape(1, -1))
         return idxs[0][1:]
 
+if "df" not in st.session_state:
+    ts_file = "./Netfloox-app/data/save_data_clean.tsv"
+    st.session_state["df"] = pd.read_csv(ts_file, sep="\t", encoding="utf-8")
+
+df = st.session_state["df"]
+
+if "rec" not in st.session_state:
+    st.session_state["rec"] = RecSysKNN(n=5, df=df, data_path='./Netfloox-app/data/vec_clean_data.npy')
+
+rec = st.session_state["rec"]
 ts_file = "./Netfloox-app/data/save_data_clean.tsv"
 st.session_state["df"]=pd.read_csv(ts_file, sep="\t", encoding="utf-8")   
 df = st.session_state["df"] 
