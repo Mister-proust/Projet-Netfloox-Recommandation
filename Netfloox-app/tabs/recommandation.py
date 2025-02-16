@@ -8,7 +8,7 @@ import json
 
 class RecSysKNN :
     
-    def __init__(self, n, df, data_path='./data/vec_clean_data.npy'):
+    def __init__(self, n, df, data_path='./Netfloox-app/data/vec_clean_data.npy'):
         self._n = n+1
         self.load_model(data_path, df)
     
