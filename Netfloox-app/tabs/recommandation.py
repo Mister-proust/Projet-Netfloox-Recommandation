@@ -40,16 +40,18 @@ rec=st.session_state["rec"]
 
 def Recommandation():
     st.markdown("<h1 style='text-align: center;'>🎬 Films Recommandation</h1>", unsafe_allow_html=True)
+    
     if "rec" not in st.session_state:
         st.session_state["rec"] = RecSysKNN(n=5, df=df, data_path='./Netfloox-app/data/vec_clean_data.npy')
     
     rec = st.session_state["rec"]
     listeRecommandations = []
+    
     if "primaryTitle" in df.columns:
         option = st.selectbox("Which film did you watch ?", df["primaryTitle"], key="film")
         
         movie_data = requests.get(f"https://www.omdbapi.com/?apikey=1f2e1d6a&t={option}").text
-        st.session_state["movie_data"]=json.loads(movie_data)
+        st.session_state["movie_data"] = json.loads(movie_data)
         
         movie_json = st.session_state["movie_data"]
         
@@ -60,31 +62,20 @@ def Recommandation():
                 st.image(poster_url, width=150)
             else:
                 st.warning(f"Nothing found for {option}.")
-            print(option)
+        
         with col2:
             plot = movie_json.get("Plot", "No synopsis available")
             st.info(f"**Synopsis :** {plot}")
-            st.header("Here, you're 5 recommanded films 🍿")
+            st.header("Here, you're 5 recommended films 🍿")
                 
-                # Garder uniquement les colonnes numériques et supprimer les NaN
-            df_numeric = df
-                
-            if df_numeric.shape[1] > 0:
-                print(option)
+            if df.shape[1] > 0:
                 idx = df[df["primaryTitle"] == option].index[0]
-                print("indice", idx)
-                indices = st.session_state["rec"].recommand(idx)
-                listeRecommandations = st.session_state["df"]["primaryTitle"].iloc[indices]
-                print(indices)
-                #nbrs = NearestNeighbors(n_neighbors=7).fit(df_numeric)
-                #ligne = df[df["primaryTitle"] == option].index[0]
-                #distances, indices = nbrs.kneighbors(df_numeric.iloc[ligne].values.reshape(1, -1))
-                listeRecommandations = df["primaryTitle"].loc[indices]
-                #st.write(f"Index recherché : {idx}, Taille du DataFrame : {len(df)}")
+                indices = rec.recommand(idx)  # Utilisation de rec (garanti non vide)
+                listeRecommandations = df["primaryTitle"].iloc[indices]
             else:
                 st.error("No numeric Data available for the model")
                 listeRecommandations = []
-            print(len(listeRecommandations))
+
             for film in listeRecommandations:
                 movie_data = requests.get(f"https://www.omdbapi.com/?apikey=1f2e1d6a&t={film}").text
                 movie_json = json.loads(movie_data)
@@ -98,4 +89,4 @@ def Recommandation():
                 if plot_en and plot_en != "N/A":
                     st.caption(plot_en)
                 else:
-                    st.warning(f"no synopsis available for {film}.")
+                    st.warning(f"No synopsis available for {film}.")
