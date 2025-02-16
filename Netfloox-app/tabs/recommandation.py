@@ -25,7 +25,7 @@ ts_file = "./Netfloox-app/data/save_data_clean.tsv"
 st.session_state["df"]=pd.read_csv(ts_file, sep="\t", encoding="utf-8")   
 df = st.session_state["df"] 
 
-st.session_state["rec"] = RecSysKNN(n=5, df=df, data_path='./data/vec_clean_data.npy')
+st.session_state["rec"] = RecSysKNN(n=5, df=df, data_path='./Netfloox-app/data/vec_clean_data.npy')
 rec=st.session_state["rec"]
 
 def Recommandation():
