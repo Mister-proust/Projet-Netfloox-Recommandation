@@ -40,6 +40,10 @@ rec=st.session_state["rec"]
 
 def Recommandation():
     st.markdown("<h1 style='text-align: center;'>🎬 Films Recommandation</h1>", unsafe_allow_html=True)
+    if "rec" not in st.session_state:
+        st.session_state["rec"] = RecSysKNN(n=5, df=df, data_path='./Netfloox-app/data/vec_clean_data.npy')
+    
+    rec = st.session_state["rec"]
     listeRecommandations = []
     if "primaryTitle" in df.columns:
         option = st.selectbox("Which film did you watch ?", df["primaryTitle"], key="film")
