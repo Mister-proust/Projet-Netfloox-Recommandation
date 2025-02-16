@@ -12,7 +12,6 @@ data/*.npy
 data/data10k/*.tsv
 data/data10k/*.zip
 novel.npy
-save_data_clean.tsv
 
 # C extensions
 .ipynb_checkpoints/*
