@@ -21,7 +21,7 @@ class RecSysKNN :
         _, idxs = self.nbrs.kneighbors(self._X[idx,:].reshape(1, -1))
         return idxs[0][1:]
 
-ts_file = "./data/save_data_clean.tsv"
+ts_file = "./Netfloox-app/data/save_data_clean.tsv"
 st.session_state["df"]=pd.read_csv(ts_file, sep="\t", encoding="utf-8")   
 df = st.session_state["df"] 
 
