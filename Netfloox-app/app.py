@@ -29,7 +29,7 @@ if not st.session_state["authenticated"]:
                 st.error("incorrect ID or Password.")
     st.stop()
 
-st.sidebar.image("assets/NETFLOOX.jpg", use_container_width=True)
+st.sidebar.image("./Netfloox-app/assets/NETFLOOX.jpg", use_container_width=True)
 st.sidebar.header(f"Welcome, {st.session_state['user']} !")
 if st.sidebar.button("Disconnect", use_container_width=True):
     st.session_state["authenticated"] = False
