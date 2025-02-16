@@ -11,7 +11,7 @@ def Visualisation():
   
     @st.cache_data
     def load_data():
-        return pd.read_csv("./data/save_data_clean.tsv", sep="\t")
+        return pd.read_csv("./Netfloox-app/data/save_data_clean.tsv", sep="\t")
 
     df = load_data()
 

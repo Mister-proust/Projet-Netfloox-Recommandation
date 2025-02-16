@@ -42,9 +42,9 @@ def Popularity() :
         if 'display' in st.session_state.keys():
             st.session_state.display = False
 
-    def load_genres(): st.session_state['genres'] = pd.read_csv("./data/genres.csv", )
-    def load_names() : st.session_state['names']  = pd.read_csv("./data/names_ad.csv", nrows=10000)
-    def load_types() : st.session_state['types']  = pd.read_csv("./data/titletype.csv")
+    def load_genres(): st.session_state['genres'] = pd.read_csv("./Netfloox-app/data/genres.csv", )
+    def load_names() : st.session_state['names']  = pd.read_csv("./Netfloox-app/data/names_ad.csv", nrows=10000)
+    def load_types() : st.session_state['types']  = pd.read_csv("./Netfloox-app/data/titletype.csv")
 
     def set_startYear() : 
         st.session_state.features.loc[0,'startYear'] = st.session_state._year
@@ -92,8 +92,8 @@ def Popularity() :
     if 'types'    not in st.session_state.keys() : load_types()
     if 'display'  not in st.session_state.keys() : st.session_state['display'] = False
     if 'rating'   not in st.session_state.keys() : st.session_state['rating']  = -1.0
-    if '_model'    not in st.session_state.keys() : st.session_state['_model'] = joblib.load('./model/modelgbr.pkl')
-    if '_qt'    not in st.session_state.keys() : st.session_state['_qt'] = joblib.load('./model/ratingmodel.pkl')
+    if '_model'    not in st.session_state.keys() : st.session_state['_model'] = joblib.load('./Netfloox-app/model/modelgbr.pkl')
+    if '_qt'    not in st.session_state.keys() : st.session_state['_qt'] = joblib.load('./Netfloox-app/model/ratingmodel.pkl')
 
     col1, col2= st.columns([0.5, 0.5], gap='large')
     with col1 :
